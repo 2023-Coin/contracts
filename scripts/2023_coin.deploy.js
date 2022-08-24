@@ -8,8 +8,7 @@ async function main() {
 }
 
 // Mainnet Contract: https://bscscan.com/address/0x#code
-// Testnet Contract: https://testnet.bscscan.com/address/0xFd3ccE6b80f751E51b728541fa1A0c721cBAbF3F#code
-// npx hardhat verify 0xFd3ccE6b80f751E51b728541fa1A0c721cBAbF3F --network bsc_testnet
+// Testnet Contract: https://testnet.bscscan.com/address/0x34ecC6bEA48dF3487729fD05d6a87BeA90ed4971#code
 
 main()
   .then(() => process.exit(0))

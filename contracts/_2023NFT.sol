@@ -2,6 +2,7 @@
 pragma solidity 0.8.16;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
@@ -98,5 +99,25 @@ contract _2023NFT is ERC721, Ownable {
    */
   function contractURI() external pure returns (string memory) {
     return "https://2023coin.club/2023_nft";
+  }
+
+  /**
+   * @notice Added to support recovering ether trapped in the contract
+   * @dev Only owner can call it
+   */
+  function recoverEther() external onlyOwner {
+    (bool sent, ) = owner().call{value: address(this).balance}("");
+    require(sent, "_2023NFT: Couldn't send ether to you.");
+  }
+
+  /**
+   * @notice Added to support recovering ERC20 tokens trapped in the contract
+   * @param _tokenAddress address
+   * @dev Only owner can call it and token address is not address(0)
+   */
+  function recoverERC20(address _tokenAddress) external onlyOwner {
+    require(_tokenAddress != address(0), "_2023NFT: Invalid token address.");
+    bool sent = IERC20(_tokenAddress).transfer(owner(), IERC20(_tokenAddress).balanceOf(address(this)));
+    require(sent, "_2023NFT: Couldn't send ERC20 tokens to you.");
   }
 }

@@ -10,8 +10,7 @@ async function main() {
 }
 
 // Mainnet Contract: https://bscscan.com/address/0x#code
-// Testnet Contract: https://testnet.bscscan.com/address/0xF59842400Cfb999A075F66eb0C4f10DAC81D8757#code
-// npx hardhat verify 0xF59842400Cfb999A075F66eb0C4f10DAC81D8757 --network bsc_testnet --constructor-args scripts/args/2023_nft.arguments.js
+// Testnet Contract: https://testnet.bscscan.com/address/0xB4479dE2D3C9b2963b1f38226729D8b7544eAfc9#code
 
 main()
   .then(() => process.exit(0))
