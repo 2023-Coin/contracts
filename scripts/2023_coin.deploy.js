@@ -7,7 +7,7 @@ async function main() {
   console.log(`2023 Coin deployed at ${_2023CoinInstance.address}`);
 }
 
-// Mainnet Contract: https://bscscan.com/address/0x#code
+// Mainnet Contract: https://bscscan.com/address/0x4C61d50e80E168Da836D19bac1FbF3a2A783AaBD#code
 // Testnet Contract: https://testnet.bscscan.com/address/0x34ecC6bEA48dF3487729fD05d6a87BeA90ed4971#code
 
 main()
