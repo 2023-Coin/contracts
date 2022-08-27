@@ -2,11 +2,13 @@
 
 **Site:** [https://2023coin.club](https://2023coin.club)
 
-**Token Address:** [0xfDfF7a8eDA6a3739132867f989bE4bf84E803c15](https://bscscan.com/address/0xfDfF7a8eDA6a3739132867f989bE4bf84E803c15)
+**Token Address:** [0x4C61d50e80E168Da836D19bac1FbF3a2A783AaBD](https://bscscan.com/address/0x4C61d50e80E168Da836D19bac1FbF3a2A783AaBD)
 
-**Buy Token:** [PancakeSwap](https://pancakeswap.finance/swap?from=BNB&to=0xfDfF7a8eDA6a3739132867f989bE4bf84E803c15)
+**Buy Token:** [PancakeSwap](https://pancakeswap.finance/swap?inputCurrency=BNB&outputCurrency=0x4C61d50e80E168Da836D19bac1FbF3a2A783AaBD)
 
-**NFT Address:** [0xfDfF7a8eDA6a3739132867f989bE4bf84E803c15](https://bscscan.com/address/0xfDfF7a8eDA6a3739132867f989bE4bf84E803c15)
+**Add Liquidity:** [Add Liquidity](https://pancakeswap.finance/add/0x4C61d50e80E168Da836D19bac1FbF3a2A783AaBD/BNB)
+
+**2023 NFT Address:** [0xB3910E96071d45d3d86B3759c7572BDf9e81dE33](https://bscscan.com/address/0xB3910E96071d45d3d86B3759c7572BDf9e81dE33)
 
 **Mint NFT:** [Mint Page](https://2023coin.club/nft)
 
