@@ -17,3 +17,5 @@
 **Follow Us on Instagram:** [Instagram Page](https://instagram.com/2023coin)
 
 **Follow Us on TikTok:** [TikTok Page](https://www.tiktok.com/@2023coin)
+
+**Follow Us on Twitter:** [Twitter Page](https://www.twitter.com/2023_coin)
