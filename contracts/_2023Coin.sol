@@ -21,6 +21,7 @@ contract _2023Coin is ERC20, Ownable {
    */
   function burn(uint256 _amount) external {
     require(balanceOf(msg.sender) >= _amount, "_2023Coin: Insufficient token balance.");
+
     _burn(msg.sender, _amount);
   }
 
@@ -40,6 +41,7 @@ contract _2023Coin is ERC20, Ownable {
    */
   function recoverERC20(address _tokenAddress) external onlyOwner {
     require(_tokenAddress != address(0), "_2023Coin: Invalid token address.");
+    
     bool sent = IERC20(_tokenAddress).transfer(owner(), IERC20(_tokenAddress).balanceOf(address(this)));
     require(sent, "_2023Coin: Couldn't send ERC20 tokens to you.");
   }

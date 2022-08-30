@@ -1,8 +1,6 @@
 const { expect } = require('chai');
 const { ethers } = require('hardhat');
 
-const mintFeeRecipient = '0x2E7b6533641b120E88Bd9d97Aa2D7Fd0091Cf32e';
-
 describe('_2023NFT', () => {
   let _2023NFT,
     contractURI,
@@ -17,8 +15,8 @@ describe('_2023NFT', () => {
   before(async () => {
     accounts = await ethers.getSigners();
 
-    contractURI = 'https://2023coin.club/2023_nft';
-    baseURI = 'https://2023coin.club/nft_id/';
+    contractURI = 'https://2023coin.club/2023_nft.html';
+    baseURI = 'https://2023coin.club/2023_nft.html?id=';
     maxSupply = 2023;
     mintPrice = ethers.utils.parseEther('0.2023');
     deployer = accounts[0];
@@ -26,7 +24,7 @@ describe('_2023NFT', () => {
     user2 = accounts[2];
 
     _2023NFT = await ethers.getContractFactory('_2023NFT');
-    _2023NFTInstance = await _2023NFT.deploy(mintFeeRecipient);
+    _2023NFTInstance = await _2023NFT.deploy();
     await _2023NFTInstance.deployed();
     console.log(`2023 NFT deployed at ${_2023NFTInstance.address}`);
   });
@@ -45,7 +43,7 @@ describe('_2023NFT', () => {
 
   it('Should check the mint fee recipient', async () => {
     const feeRecipient = await _2023NFTInstance.mintFeeRecipient();
-    expect(feeRecipient).to.equal(mintFeeRecipient);
+    expect(feeRecipient).to.equal(deployer.address);
   });
 
   it('Should check that the initial nftId is set to 1', async () => {
@@ -70,7 +68,17 @@ describe('_2023NFT', () => {
     expect(whitelisted3).to.equal(true);
   });
 
+  it('Should enable minting', async () => {
+    const isMintingEnabled = await _2023NFTInstance.isMintingEnabled();
+    expect(isMintingEnabled).to.equal(false);
+    await _2023NFTInstance.enableMinting();
+    const isMintingEnabled2 = await _2023NFTInstance.isMintingEnabled();
+    expect(isMintingEnabled2).to.equal(true);
+  });
+
   it('Should mint 3 NFTs - 1 for each of the whitelisted users', async () => {
+    const totalSupplyBefore = await _2023NFTInstance.totalSupply();
+    expect(totalSupplyBefore.toNumber()).to.equal(0);
     await _2023NFTInstance.mint({ value: mintPrice });
     const nftId = await _2023NFTInstance.nftId();
     expect(nftId.toNumber()).to.equal(2);
@@ -80,12 +88,18 @@ describe('_2023NFT', () => {
     await _2023NFTInstance.connect(user2).mint({ value: mintPrice });
     const nftId3 = await _2023NFTInstance.nftId();
     expect(nftId3.toNumber()).to.equal(4);
+    const totalSupplyAfter = await _2023NFTInstance.totalSupply();
+    expect(totalSupplyAfter.toNumber()).to.equal(3);
   });
 
   it('Should burn the NFT of the ID of 1', async () => {
+    const totalSupplyBefore = await _2023NFTInstance.totalSupply();
+    expect(totalSupplyBefore.toNumber()).to.equal(3);
     await _2023NFTInstance.burn(1);
     const balanceAfterBurn = await _2023NFTInstance.balanceOf(deployer.address);
     expect(balanceAfterBurn.toNumber()).to.equal(0);
+    const totalSupplyAfter = await _2023NFTInstance.totalSupply();
+    expect(totalSupplyAfter.toNumber()).to.equal(2);
   });
 
   it('Should verify the contractURI', async () => {
