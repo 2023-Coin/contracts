@@ -5,16 +5,34 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract _2023Coin is ERC20, Ownable {
-  /// @notice The max supply of the 2023 Coin (1 billion tokens)
+contract CustomizableToken is ERC20, Ownable {
+    /// @notice The max supply of the token (1 billion tokens)
   uint256 public constant MAX_SUPPLY = 1000000000 * 1e18;
 
   /// @notice Constructor
-  constructor() ERC20("2023 Coin", "2023") {
+  constructor() ERC20("Token", "TKN") {
     _mint(msg.sender, MAX_SUPPLY);
   }
 
   receive() external payable {}
+
+  /**
+   * @notice Changes the token's name
+   * @param name_ string calldata 
+   * @dev Only owner can call it
+   */
+  function changeName(string calldata name_) external onlyOwner {
+    _name = name_;
+  }
+
+  /**
+   * @notice Changes the token's symbol
+   * @param symbol_ string calldata 
+   * @dev Only owner can call it
+   */
+  function changeSymbol(string calldata symbol_) external onlyOwner {
+    _symbol = symbol_;
+  }
 
   /**
    * @notice Burns tokens from the balance of the sender
@@ -22,7 +40,7 @@ contract _2023Coin is ERC20, Ownable {
    * @dev Reverts if the sender doesn't have enough balance
    */
   function burn(uint256 _amount) external {
-    require(balanceOf(msg.sender) >= _amount, "_2023Coin: Insufficient token balance.");
+    require(balanceOf(msg.sender) >= _amount, "CustomizableToken: Insufficient token balance.");
 
     _burn(msg.sender, _amount);
   }
@@ -33,7 +51,7 @@ contract _2023Coin is ERC20, Ownable {
    */
   function recoverEther() external onlyOwner {
     (bool sent, ) = owner().call{value: address(this).balance}("");
-    require(sent, "_2023Coin: Couldn't send ether to you.");
+    require(sent, "CustomizableToken: Couldn't send ether to you.");
   }
 
   /**
@@ -42,9 +60,9 @@ contract _2023Coin is ERC20, Ownable {
    * @dev Only owner can call it and token address is not address(0)
    */
   function recoverERC20(address _tokenAddress) external onlyOwner {
-    require(_tokenAddress != address(0), "_2023Coin: Invalid token address.");
+    require(_tokenAddress != address(0), "CustomizableToken: Invalid token address.");
     
     bool sent = IERC20(_tokenAddress).transfer(owner(), IERC20(_tokenAddress).balanceOf(address(this)));
-    require(sent, "_2023Coin: Couldn't send ERC20 tokens to you.");
+    require(sent, "CustomizableToken: Couldn't send ERC20 tokens to you.");
   }
 }

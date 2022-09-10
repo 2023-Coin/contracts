@@ -27,7 +27,7 @@ task('balance', 'Prints the ether balance of an account')
   });
 
 module.exports = {
-  solidity: '0.8.16',
+  solidity: '0.8.17',
   settings: {
     optimizer: {
       enabled: true,

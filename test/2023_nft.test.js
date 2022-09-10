@@ -2,15 +2,8 @@ const { expect } = require('chai');
 const { ethers } = require('hardhat');
 
 describe('_2023NFT', () => {
-  let _2023NFT,
-    contractURI,
-    baseURI,
-    maxSupply,
-    mintPrice,
-    accounts,
-    deployer,
-    user1,
-    user2;
+  let _2023NFT, _2023NFTInstance;
+  contractURI, baseURI, maxSupply, mintPrice, accounts, deployer, user1, user2;
 
   before(async () => {
     accounts = await ethers.getSigners();

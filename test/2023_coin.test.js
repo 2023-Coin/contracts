@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const { ethers } = require('hardhat');
 
 describe('_2023Coin', () => {
-  let _2023Coin, maxSupply, deployer;
+  let _2023Coin, _2023CoinInstance, maxSupply, deployer;
 
   before(async () => {
     const accounts = await ethers.getSigners();
